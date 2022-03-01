@@ -7,7 +7,8 @@ const spinner = displaySpinner => {
 const searchPhone = () => {
 
         const phone = document.getElementById('search-phone').value
-            // spinner
+
+        // spinner
         spinner('block')
             // loading phone data
         const url = `https://openapi.programming-hero.com/api/phones?search=${phone}`
@@ -18,17 +19,26 @@ const searchPhone = () => {
     }
     // showing phone information
 const phoneDetails = (phones) => {
-
         const showPhone = document.getElementById('phones-container')
-        showPhone.textContent = ''
+        spinner('none')
+        if (phones.length == 0) {
+            const errorMessage = document.getElementById('error')
 
-        for (const phone of phones) {
+            errorMessage.innerText = 'No phones Found'
 
-            const phoneDiv = document.createElement('div')
-            phoneDiv.classList.add('col-md-4')
-            phoneDiv.classList.add('mb-3')
+            showPhone.textContent = ''
+            spinner('none')
+        } else {
+            const errorMessage = document.getElementById('error')
+            errorMessage.innerText = ''
 
-            phoneDiv.innerHTML = `
+            for (const phone of phones) {
+
+                const phoneDiv = document.createElement('div')
+                phoneDiv.classList.add('col-md-4')
+                phoneDiv.classList.add('mb-3')
+
+                phoneDiv.innerHTML = `
         <div   class="card" >
         <img class="card-img-top" src="${phone.image}" >
         <div class="card-body">
@@ -38,10 +48,19 @@ const phoneDetails = (phones) => {
         </div>
       </div>
         `
-            showPhone.appendChild(phoneDiv)
+                showPhone.appendChild(phoneDiv)
+
+            }
+
+
+
 
         }
-        spinner('none')
+
+        errorMessage.innerHTML = ""
+        showPhone.textContent = ''
+
+
     }
     // getting the specification of phone
 const phoneDetail = (id) => {
@@ -62,11 +81,11 @@ const showPhoneDetail = (detail) => {
     detailDiv.classList.add("card")
     detailDiv.innerHTML = `<div>  <img class="card-img-top" src="${detail.image}" >
     <div class="card-body">
-    <p>Brand: ${detail.brand} </p>
-    <p> Release Date: ${detail.releaseDate?detail.releaseDate:"coming soon"} </p> <p> Main Features: Chipset ${detail.mainFeatures.chipSet}  </p> <p> Memory: ${detail.mainFeatures.memory}  </p> <p> Display: ${detail.mainFeatures.displaySize} </p> <p> ID:${detail.slug} </p> <p>Storage:${detail.mainFeatures.storage}
-    <p>Sensors:   ${detail.mainFeatures.sensors?detail.mainFeatures.sensors:"not available"}  </P>
-    <p>Others: ${detail.others?detail.others.WLAN:"not available"} Bluetooth: ${detail.others?detail.others.Bluetooth:        
-    "not available"} GPS: ${detail.others?detail.others.GPS:"not available"}  NFC: ${detail.others?detail.others.NFC:"not available"} Radio:${detail.others?detail.others.Radio:"not available"}  </P>
+    <h6>Brand: ${detail.brand} </h6>
+    <h6> Release Date:  ${detail.releaseDate?detail.releaseDate:"coming soon"}  </h6> <h6> Main Features: Chipset ${detail.mainFeatures.chipSet}  </h6> <h6> Memory: ${detail.mainFeatures.memory}  </h6> <h6> Display: ${detail.mainFeatures.displaySize} </h6> <h6> ID:${detail.slug} </h6> <h6>Storage:${detail.mainFeatures.storage}
+    <h6>Sensors:   ${detail.mainFeatures.sensors?detail.mainFeatures.sensors:"not available"}  </h6>
+    <h6>Others: ${detail.others?detail.others.WLAN:"not available"} Bluetooth: ${detail.others?detail.others.Bluetooth:        
+    "not available"} GPS: ${detail.others?detail.others.GPS:"not available"}  NFC: ${detail.others?detail.others.NFC:"not available"} Radio:${detail.others?detail.others.Radio:"not available"}  </h6>
     </div>
       
     </div>`
