@@ -18,6 +18,7 @@ const searchPhone = () => {
     }
     // showing phone information
 const phoneDetails = (phones) => {
+
         const showPhone = document.getElementById('phones-container')
         showPhone.textContent = ''
 
@@ -62,7 +63,11 @@ const showPhoneDetail = (detail) => {
     detailDiv.innerHTML = `<div>  <img class="card-img-top" src="${detail.image}" >
     <div class="card-body">
     <p>Brand: ${detail.brand} </p>
-    <p> Release Date: ${detail.releaseDate} </p> <p> Main Features: Chipset ${detail.mainFeatures.chipSet}  </p> <p> Memory: ${detail.mainFeatures.memory}  </p> <p> Display: ${detail.mainFeatures.displaySize} </p> <p> ID:${detail.slug} </p> <p>Storage:${detail.mainFeatures.storage}</div>
+    <p> Release Date: ${detail.releaseDate?detail.releaseDate:"coming soon"} </p> <p> Main Features: Chipset ${detail.mainFeatures.chipSet}  </p> <p> Memory: ${detail.mainFeatures.memory}  </p> <p> Display: ${detail.mainFeatures.displaySize} </p> <p> ID:${detail.slug} </p> <p>Storage:${detail.mainFeatures.storage}
+    <p>Sensors:   ${detail.mainFeatures.sensors?detail.mainFeatures.sensors:"not available"}  </P>
+    <p>Others: ${detail.others?detail.others.WLAN:"not available"} Bluetooth: ${detail.others?detail.others.Bluetooth:        
+    "not available"} GPS: ${detail.others?detail.others.GPS:"not available"}  NFC: ${detail.others?detail.others.NFC:"not available"} Radio:${detail.others?detail.others.Radio:"not available"}  </P>
+    </div>
       
     </div>`
 
