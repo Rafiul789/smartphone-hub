@@ -1,21 +1,23 @@
-const searchPhone = () => {
-    const phone = document.getElementById('search-phone').value
-    const url = `https://openapi.programming-hero.com/api/phones?search=${phone}`
-    fetch(url)
-        .then((response) => response.json())
-        .then(data => phoneDetails(data.data))
-}
+// getting phone searchbar
 
+const searchPhone = () => {
+        const phone = document.getElementById('search-phone').value
+        const url = `https://openapi.programming-hero.com/api/phones?search=${phone}`
+        fetch(url)
+            .then((response) => response.json())
+            .then(data => phoneDetails(data.data))
+    }
+    // showing phone information
 const phoneDetails = (phones) => {
 
 
-    for (const phone of phones) {
-        const showPhone = document.getElementById('phones-container')
-        const phoneDiv = document.createElement('div')
-        phoneDiv.classList.add('col-md-4')
-        phoneDiv.classList.add('mb-3')
+        for (const phone of phones) {
+            const showPhone = document.getElementById('phones-container')
+            const phoneDiv = document.createElement('div')
+            phoneDiv.classList.add('col-md-4')
+            phoneDiv.classList.add('mb-3')
 
-        phoneDiv.innerHTML = `
+            phoneDiv.innerHTML = `
         <div onclick="phoneDetail('${phone.slug}')"  class="card" >
         <img class="card-img-top" src="${phone.image}" >
         <div class="card-body">
@@ -25,20 +27,20 @@ const phoneDetails = (phones) => {
         </div>
       </div>
         `
-        showPhone.appendChild(phoneDiv)
+            showPhone.appendChild(phoneDiv)
+        }
+
     }
-
-}
-
+    // getting the specification of phone
 const phoneDetail = (id) => {
 
-    const url = `https://openapi.programming-hero.com/api/phone/${id}`
+        const url = `https://openapi.programming-hero.com/api/phone/${id}`
 
-    fetch(url)
-        .then((response) => response.json())
-        .then(data => showPhoneDetail(data.data))
-}
-
+        fetch(url)
+            .then((response) => response.json())
+            .then(data => showPhoneDetail(data.data))
+    }
+    // showing the specification
 const showPhoneDetail = (detail) => {
 
     console.log(detail)
